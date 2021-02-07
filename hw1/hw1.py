@@ -16,23 +16,27 @@ item has a smaller items on both the left and right ...
 
 ----- pseudocode -------
 define a top and bottom index 
-while !((item > item-1) and (item > item + 1))
+while not (end condition)
 
     redefine a top and bottom based on the surroudning elements - should the bottom shift up to the current item index, or the top shift down
     recompute the item index, it's in the middle of the top and bottom 
+    compute the end condition
 
-once we land on the largest item return it
+when you exit the while loop, we are left with the largest item, and we return it
 
-* note all operations are done with item indices
+* note all operations are done with item indices - top, bottom, & middle index
 ---
+
 why does it run in O(log(N)) time: with every step it cuts in half the number of elements it needs to search through. It takes log2(N) iterations 
 to return a value. Thus it's complexity is O(log(N)). 
 
 b) 
-loop invariant - 
-initialization - 
-maintenance - 
-termination - 
+loop invariant - the condition that holds true every iteration is that imid is in the middle of the top and bottom index, and the top index / bottom index will always shift to move imid
+closer to the highest element
+
+initialization - itop and ibtm are initialized as the highest element and lowest in the array, and imid is in the middle
+maintenance - with a conditional we shift itop or ibtm to the value of imid and recalculate imid. 
+termination - When the exit_case is met, the while loop is terminated and the value of the array at imid index is returned. 
 """
 
 __author__ = "Adi Ramachandran"
@@ -46,6 +50,9 @@ def find_max_val_unimodal_arr(arr):
     imid = int((itop-ibtm)/2+ibtm)
     exit_case = arr[imid]>arr[imid+1] and ((imid-1<0) or arr[imid]>arr[imid-1])
 
+    if len(arr)==2: 
+        return arr[0] if arr[0]>arr[1] else arr[1]
+
     while not (exit_case): # only one of these needs to be true 
         # determine which side of the arr we're on, and always move towards the 'middle' --> however, we can only use the right side bc we're only guaranteed a number on the right side. 
         if arr[imid]<arr[imid+1]: 
@@ -55,7 +62,7 @@ def find_max_val_unimodal_arr(arr):
             itop = imid
         imid = int((itop-ibtm)/2+ibtm)
         exit_case = arr[imid]>arr[imid+1] and ((imid-1<0) or arr[imid]>arr[imid-1])
-        print(imid, exit_case)
+        print(imid, exit_case) # for debug
         
 
     return arr[imid]
