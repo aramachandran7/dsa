@@ -6,7 +6,7 @@ get edge case of 2 nums working
 get basic proof down
 """
 
-# import pytest
+import pytest
 from hw1 import find_max_val_unimodal_arr
 
 __author__ = "Adi Ramachandran"
@@ -20,7 +20,7 @@ test_cases = [
     [4,9,12,13,14,13,12,11,4,-1, -29],
     [-44449999,-44449998,-44449993,-44449992, -44449991, -44449990, 0, -55550000],
     [1,2], 
-    [1,2,3,2]
+    [1,2,3,2],
 ]
 
 
